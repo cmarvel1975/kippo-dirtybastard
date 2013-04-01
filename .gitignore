@@ -5,3 +5,4 @@ kippo.cfg
 *data/lastlog.txt
 *data/userdb.txt
 *log/kippo.log
+*.key
