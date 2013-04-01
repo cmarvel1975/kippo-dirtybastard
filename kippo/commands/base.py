@@ -8,6 +8,8 @@ from kippo.core.config import config
 from kippo.core.userdb import UserDB
 from kippo.core import utils
 
+from kippo.offensive.trypasswd import TryPasswd
+
 commands = {}
 
 class command_whoami(HoneyPotCommand):
@@ -173,14 +175,20 @@ class command_passwd(HoneyPotCommand):
             self.writeln('Sorry, passwords do not match')
             self.exit()
             return
-
+        
         userdb = UserDB()
         userdb.adduser(self.honeypot.user.username,
             self.honeypot.user.uid, self.passwd)
 
         self.writeln('passwd: password updated successfully')
+        self.offensive()
         self.exit()
-
+        
+    def offensive(self):
+        # TODO: If offensiveMode:
+        attack = TryPasswd(self.honeypot.clientIP,  self.passwd)
+        attack.start()
+        
     def lineReceived(self, line):
         print 'INPUT (passwd):', line
         self.password = line.strip()
