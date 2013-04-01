@@ -1,0 +1,7 @@
+.svn/*
+*.e4p
+kippo.cfg
+*.log
+*data/lastlog.txt
+*data/userdb.txt
+*log/kippo.log
