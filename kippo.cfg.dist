@@ -2,6 +2,13 @@
 # Kippo configuration file (kippo.cfg)
 #
 
+[dirtybastard]
+
+# Bash commands for if dirtybastard gets root on a box
+# Use the semi-colon to string commands together.  
+root_command = "mkdir DIRTYBASTARD_WAS_HERE; ls -lah"
+
+
 [honeypot]
 
 # IP addresses to listen for incoming SSH connections.

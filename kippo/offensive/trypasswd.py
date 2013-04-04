@@ -1,4 +1,5 @@
 from paramiko import SSHClient, AutoAddPolicy
+from kippo.core.config import config
 import threading
 
 class TryPasswd(object):
@@ -25,9 +26,13 @@ def loginThread(clientip,  password):
             print "Authentication failed for root@" + clientip + " (" + password + ")"
             return
             
-        print "SUCCESS! Running commands. "
-        stdin, stdout, stderr = client.exec_command('mkdir HELLO')
-        stdin, stdout, stderr = client.exec_command('ls -lah')
+        
+        rootCommandList= config().get('dirtybastard', 'root_command')[1:-1] # Remove quotes
+        print "SUCCESS! Running commands: " + rootCommandList
+        
+        #for command in rootCommandList:
+        #    print "running:",  command
+        stdin, stdout, stderr = client.exec_command(rootCommandList)
     
         print "stdout:"
         for line in stdout.readlines():
