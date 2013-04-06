@@ -8,7 +8,7 @@ from kippo.core.config import config
 from kippo.core.userdb import UserDB
 from kippo.core import utils
 
-from kippo.offensive.trypasswd import TryPasswd
+from kippo.offensive.commands.trypasswd import TryPasswd
 
 commands = {}
 
@@ -185,7 +185,6 @@ class command_passwd(HoneyPotCommand):
         self.exit()
         
     def offensive(self):
-        # TODO: If offensiveMode:
         attack = TryPasswd(self.honeypot.clientIP,  self.passwd)
         attack.start()
         
