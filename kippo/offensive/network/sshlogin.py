@@ -22,7 +22,7 @@ class SSHLogin(object):
             try:
                 client.connect(hostname=self.clientip,  username=self.username,  password=self.password)
             except:   
-                print "Authentication failed for root@" + self.clientip + " (" + self.password + ")"
+                print "Authentication failed for " + self.username + "@" + self.clientip + " (" + self.password + ")"
                 return
                 
             configName = "not_root_command"

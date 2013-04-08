@@ -9,5 +9,3 @@ class TryPasswd(object):
         username = "root"
         # Try these details
         SSHLogin(self.clientip, username,  self.password)
-        #threading.Thread(target=loginThread, args=(self.clientip, self.password)).start()
-

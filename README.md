@@ -10,12 +10,12 @@ Features
 
 So far the feature list is short as I've just gotten going with this but:
 * If the attacker uses *passwd*, try this new password on their machine.
+* Try account credentials added with *adduser*.
 
 Planned
 -------
 
 To come:
-* Try *adduser* details on remote machine.
 * Vuln-scanning a host on connection.
 * Bruteforce attacker's ssh. 
 * Metasploit integration (how much of this can we automate?)
