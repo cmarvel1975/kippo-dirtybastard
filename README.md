@@ -12,12 +12,14 @@ So far the feature list is short as I've just gotten going with this but:
 * If the attacker uses *passwd*, try this new password on their machine.
 * Try account credentials added with *adduser*.
 * Email alerts for any successful return fire.
+* Portscan on connection (currently only when running as root...).
 
 Planned
 -------
 
 To come:
-* Portscan on connection.
+* Slower, less-root portscans.
+* Configurable portscanning options.
 * Bruteforce attacker's ssh (did they get into 'their' box the same way as yours?)
 
 Setup

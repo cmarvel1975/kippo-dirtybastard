@@ -15,6 +15,13 @@ root_command = "mkdir DIRTYBASTARD_WAS_HERE; ls -lah"
 # (default: "mkdir REGULAR_USER_ACCT; ls -lah")
 not_root_command = "mkdir REGULAR_USER_ACCT; ls -lah"
 
+# Perform port scan on an attacker.
+# Current ONLY WORKS AS ROOT. Feel lucky?
+#
+# (default: False)
+port_scan = True
+
+
 [honeypot]
 
 # IP addresses to listen for incoming SSH connections.
