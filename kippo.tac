@@ -14,9 +14,11 @@ from twisted.application import internet, service
 from twisted.cred import portal
 from twisted.conch.ssh import factory, keys
 
-if os.name == 'posix' and os.getuid() == 0:
-    print 'ERROR: You must not run kippo as root!'
-    sys.exit(1)
+# YOLO.
+# Run in a VM in a VM on someone else's machine.
+#if os.name == 'posix' and os.getuid() == 0:
+#    print 'ERROR: You must not run kippo as root!'
+#    sys.exit(1)
 
 if not os.path.exists('kippo.cfg'):
     print 'ERROR: kippo.cfg is missing!'

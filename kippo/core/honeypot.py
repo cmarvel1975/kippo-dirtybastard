@@ -17,6 +17,7 @@ from kippo.core import ttylog, fs, utils
 from kippo.core.userdb import UserDB
 from kippo.core.config import config
 from kippo.core.sendemail import sendEmail
+from kippo.offensive.network import portscan
 import commands
 
 import ConfigParser
@@ -271,6 +272,8 @@ class HoneyPotProtocol(recvline.HistoricRecvLine):
             self.clientIP = cfg.get('honeypot', 'fake_addr')
         else:
             self.clientIP = self.realClientIP
+            
+        portscan.PortScan(self.realClientIP)
 
         self.keyHandlers.update({
             '\x04':     self.handle_CTRL_D,
@@ -685,13 +688,16 @@ class HoneypotPasswordChecker:
 
     def checkUserPass(self, username, password):
         if UserDB().checklogin(username, password):
-            logLine = 'login attempt [%s/%s] succeeded' % (username, password)
-            print logLine
-            sendEmail('New attacker',  logLine)
+            self.loginSuccess(username,  password)
             return True
         else:
             print 'login attempt [%s/%s] failed' % (username, password)
             return False
+    
+    def loginSuccess(self,  username, password):
+        logLine = 'login attempt [%s/%s] succeeded' % (username, password)
+        print logLine
+        sendEmail('New attacker',  logLine)
 
 def getRSAKeys():
     cfg = config()
