@@ -6,8 +6,14 @@
 
 # Bash commands for if dirtybastard gets root on a box
 # Use the semi-colon to string commands together.  
+#
+# (default: "mkdir DIRTYBASTARD_WAS_HERE; ls -lah")
 root_command = "mkdir DIRTYBASTARD_WAS_HERE; ls -lah"
 
+# If we get access to any other user account, run this command:
+#
+# (default: "mkdir REGULAR_USER_ACCT; ls -lah")
+not_root_command = "mkdir REGULAR_USER_ACCT; ls -lah"
 
 [honeypot]
 
@@ -26,6 +32,25 @@ ssh_port = 2222
 #
 # (default: sales)
 hostname = sales
+
+# Email Alerts
+# Set email_alerts to True to enable email alerts. You can ignore the rest of the email settings if this is false.
+#
+# (default: False)
+email_alerts = False
+# Your smtp.
+#
+# (default: localhost)
+smtp_server = localhost
+# Your email address
+#
+# (default: you@example.com)
+to_email = you@example.com
+# The email address kippo-dirtybastard sends from.
+#
+# (default: kippo-dirtybastard@localhost)
+from_email = kippo-dirtybastard@localhost
+#
 
 # Directory where to save log files in.
 #

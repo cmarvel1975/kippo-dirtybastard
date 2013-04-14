@@ -16,6 +16,7 @@ import sys, os, random, pickle, time, stat, shlex, anydbm
 from kippo.core import ttylog, fs, utils
 from kippo.core.userdb import UserDB
 from kippo.core.config import config
+from kippo.core.sendemail import sendEmail
 import commands
 
 import ConfigParser
@@ -507,6 +508,7 @@ class HoneyPotTransport(transport.SSHServerTransport):
             (self.transport.getPeer().host, self.transport.getPeer().port,
             self.transport.getHost().host, self.transport.getHost().port,
             self.transport.sessionno)
+        
         self.interactors = []
         self.logintime = time.time()
         self.ttylog_open = False
@@ -683,7 +685,9 @@ class HoneypotPasswordChecker:
 
     def checkUserPass(self, username, password):
         if UserDB().checklogin(username, password):
-            print 'login attempt [%s/%s] succeeded' % (username, password)
+            logLine = 'login attempt [%s/%s] succeeded' % (username, password)
+            print logLine
+            sendEmail('New attacker',  logLine)
             return True
         else:
             print 'login attempt [%s/%s] failed' % (username, password)
