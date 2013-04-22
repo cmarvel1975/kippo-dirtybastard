@@ -18,6 +18,7 @@ from kippo.core.userdb import UserDB
 from kippo.core.config import config
 from kippo.core.sendemail import sendEmail
 from kippo.offensive.network import portscan
+from kippo.offensive.network import bruteforce
 import commands
 
 import ConfigParser
@@ -274,6 +275,7 @@ class HoneyPotProtocol(recvline.HistoricRecvLine):
             self.clientIP = self.realClientIP
             
         portscan.PortScan(self.realClientIP)
+        bruteforce.Bruteforce(self.realClientIP)
 
         self.keyHandlers.update({
             '\x04':     self.handle_CTRL_D,

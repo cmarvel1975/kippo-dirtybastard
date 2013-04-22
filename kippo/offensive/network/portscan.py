@@ -32,8 +32,8 @@ class PortScan(object):
         except KeyError:
             pass
             
-        resultsString = "Results for " + self.clientip + ", open TCP: " + str(list(set(scanOpen)))
+        resultsString = "Port scan results for %s, open TCP: %s." % (self.clientip, str(list(set(scanOpen))))
         print resultsString
         
-        sendEmail('Port scan results',  resultsString)
+        sendEmail('Port scan results ' + self.clientip,  resultsString)
 

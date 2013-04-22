@@ -21,6 +21,16 @@ not_root_command = "mkdir REGULAR_USER_ACCT; ls -lah"
 # (default: False)
 port_scan = True
 
+# On attacker login attempt bruteforce using Hydra on root.
+#
+# (default: False)
+bruteforce_ssh_on_login = True
+
+# (default: /usr/local/bin/hydra)
+hydra_location = /usr/local/bin/hydra
+# http://xato.net/passwords/more-top-worst-passwords/
+password_list = /home/jon/passwords.txt
+
 
 [honeypot]
 
