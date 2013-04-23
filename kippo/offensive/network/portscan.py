@@ -13,14 +13,13 @@ class PortScan(object):
             threading.Thread(target=self.scanThread).start()
 
     def scanThread(self):
-        nmapCommandArgs = "-sS"
-
         nm = nmap.PortScanner()
         
-        print "Running portscan at %s with arguments: %s" % (self.clientip, nmapCommandArgs)
+        nmapArgs = config().get('dirtybastard',  'nmap_args')[1:-1] # Remove quotes
+        print "Running portscan at %s with arguments: %s" % (self.clientip, nmapArgs)
         
         try:
-            r = nm.scan(self.clientip, arguments=nmapCommandArgs)
+            r = nm.scan(self.clientip, arguments=nmapArgs)
         except nmap.PortScannerError:
             print "!!! PortScan error. Did you request a scan type that requires root?"
             return

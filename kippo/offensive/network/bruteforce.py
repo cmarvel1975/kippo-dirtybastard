@@ -4,6 +4,7 @@ from kippo.core.config import config
 from kippo.core.sendemail import sendEmail
 
 class Bruteforce(object):
+    
     def __init__(self, clientip):
         self.clientip = clientip
         
@@ -19,13 +20,8 @@ class Bruteforce(object):
         hydraLocation = cfg.get('dirtybastard',  'hydra_location')
         listLocation = cfg.get('dirtybastard',  'password_list')
         
-        if not self.doesFileExist(hydraLocation):
-            print "Unable to find Hydra at given location: %s.\nAborting bruteforce." % (hydraLocation)
-            return
-        
-        if not self.doesFileExist(listLocation):
-            print "Unable to find password list at: %s.\nAborting bruteforce." % (listLocation)
-            return
+        if not self.validFiles(hydraLocation, listLocation):
+            return 
         
         cmd = [hydraLocation, self.clientip, "ssh", "-l", "root", "-P" , listLocation]
 
@@ -37,7 +33,18 @@ class Bruteforce(object):
         print "stdout:", out
         
         sendEmail('Hydra results ' + self.clientip,  out)
+    
+    def validFiles(self,  hydraLocation,  listLocation):
+        if not self.doesFileExist(hydraLocation):
+            print "!!! Unable to find Hydra at given location: %s.\nAborting bruteforce." % (hydraLocation)
+            return False
         
+        if not self.doesFileExist(listLocation):
+            print "!!! Unable to find password list at: %s.\nAborting bruteforce." % (listLocation)
+            return False
+            
+        return True
+    
     def doesFileExist(self,  file):
         try:
            with open(file): pass

@@ -15,11 +15,15 @@ root_command = "mkdir DIRTYBASTARD_WAS_HERE; ls -lah"
 # (default: "mkdir REGULAR_USER_ACCT; ls -lah")
 not_root_command = "mkdir REGULAR_USER_ACCT; ls -lah"
 
-# Perform port scan on an attacker.
-# Current ONLY WORKS AS ROOT. Feel lucky?
+# Perform port scan on an attacker who successfully logged into the honeypot.
 #
 # (default: False)
 port_scan = False
+# Setup nmap commandline args, e.g. "-sS"
+# NOTE: For many nmap options you'll have to be running kippo-dirtybastard as root...
+#
+# (default: "--unprivileged")
+nmap_args = "--unprivileged"
 
 # On attacker login attempt bruteforce using Hydra on root.
 #
