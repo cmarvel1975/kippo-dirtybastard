@@ -16,13 +16,6 @@ Here are the features so far:
 * Bruteforce attacker's SSH with Hydra (did they get into 'their' box the same way as yours?)
 Let me know if you have any suggestions for anything.
 
-Planned
--------
-
-To come:
-* Better portscanning options.
-* Some actual error checking.
-
 Setup
 -----
 
