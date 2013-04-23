@@ -22,8 +22,8 @@ port_scan = False
 # Setup nmap commandline args, e.g. "-sS"
 # NOTE: For many nmap options you'll have to be running kippo-dirtybastard as root...
 #
-# (default: "--unprivileged")
-nmap_args = "--unprivileged"
+# (default: "-A --unprivileged")
+nmap_args = "-A --unprivileged"
 
 # On attacker login attempt bruteforce using Hydra on root.
 #
