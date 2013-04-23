@@ -8,19 +8,19 @@ Kippo-DirtyBastard requires minimal interaction from the host, setup and forget.
 Features
 --------
 
-So far the feature list is short as I've just gotten going with this but:
+Here are the features so far:
 * If the attacker uses *passwd*, try this new password on their machine.
 * Try account credentials added with *adduser*.
 * Email alerts for any successful return fire.
-* Portscan on connection (currently only when running as root...).
+* Portscan on connection.
 * Bruteforce attacker's SSH with Hydra (did they get into 'their' box the same way as yours?)
+Let me know if you have any suggestions for anything.
 
 Planned
 -------
 
 To come:
-* Slower, less-root portscans.
-* Configurable portscanning options.
+* Better portscanning options.
 * Some actual error checking.
 
 Setup
@@ -30,6 +30,6 @@ Follow the Kippo setup guide here: https://code.google.com/p/kippo/
 
 Edit the kippo.cfg and add which commands will be automatically run once kippo-dirtybastard gets access to a remote machine.
 
-Email alert settings can also be found in the kippo.cfg. You will be emailed the stdout of a command after it has run so it might be worth making this useful.
+Email alert settings can also be found in the kippo.cfg. If kippo-dirtybastard logs in successfully anywhere, you'll be emailed the stdout afterwards, keep this in mind when writing the command in the cfg file.
 
 Requires nmap and Hydra for portscanning and bruteforcing features respectively.
