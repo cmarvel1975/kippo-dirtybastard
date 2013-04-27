@@ -9,11 +9,13 @@ Features
 --------
 
 Here are the features so far:
+
 * If the attacker uses *passwd*, try to SSH with this password onto their machine.
 * Try account credentials added with *adduser*.
 * Email alerts for any successful return fire.
 * Portscan on connection.
 * Bruteforce attacker's SSH with Hydra (did they get into 'their' box the same way as yours?).
+
 Let me know if you have any suggestions for anything.
 
 Setup
