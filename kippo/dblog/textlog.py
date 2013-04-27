@@ -34,7 +34,7 @@ class DBLogger(dblog.DBLogger):
 
     def handleLoginSucceeded(self, session, args):
         self.write(session, 'Login succeeded [%s/%s]' % \
-            args['username'], args['password'])
+            (args['username'], args['password']))
 
     def handleCommand(self, session, args):
         self.write(session, 'Command [%s]' % (args['input'],))
@@ -50,7 +50,7 @@ class DBLogger(dblog.DBLogger):
             (args['width'], args['height']))
 
     def handleClientVersion(self, session, args):
-        self.write(session, 'Client version: [%s]' % (arg['version'],))
+        self.write(session, 'Client version: [%s]' % (args['version'],))
 
     def handleFileDownload(self, session, args):
         self.write(session, 'File download: [%s] -> %s' % \

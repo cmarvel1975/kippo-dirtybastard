@@ -51,8 +51,8 @@ ssh_port = 2222
 # Hostname for the honeypot. Displayed by the shell prompt of the virtual
 # environment.
 #
-# (default: sales)
-hostname = sales
+# (default: w1)
+hostname = w1
 
 # Email Alerts
 # Set email_alerts to True to enable email alerts. You can ignore the rest of the email settings if this is false.
